@@ -12,14 +12,16 @@ We clean the data, perform exploratory data analysis (EDA), and build a simple m
 
 ## Folder Structure
 
+```text
 heartdisease/
 │
 ├── data/
-│ └── processed.cleveland.data # Raw dataset from UCI
+│   └── processed.cleveland.data  # Raw dataset from UCI
 │
-├── project.ipynb # Main Jupyter notebook
+├── project.ipynb                 # Main Jupyter notebook
 │
-└── README.md # This file
+└── README.md                     
+```
 
 
 ## Data Cleaning Summary
