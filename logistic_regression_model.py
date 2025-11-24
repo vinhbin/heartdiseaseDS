@@ -18,13 +18,24 @@ from sklearn.metrics import (
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load the pre-split data
-X_train = pd.read_csv("X_train.csv")
-X_test = pd.read_csv("X_test.csv")
-y_train = pd.read_csv("y_train.csv").values.ravel()
-y_test = pd.read_csv("y_test.csv").values.ravel()
+# Load the cleaned data
+df = pd.read_csv("cleaned_processed.cleveland.csv")
 
-print(f"Training set size: {X_train.shape[0]}")
+print("Dataset loaded successfully!")
+print(f"Dataset shape: {df.shape}")
+print("\nTarget distribution:")
+print(df['target'].value_counts())
+
+# Separate features and target
+X = df.drop('target', axis=1)
+y = df['target']
+
+# Split the data into training and testing sets (80-20 split)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+print(f"\nTraining set size: {X_train.shape[0]}")
 print(f"Testing set size: {X_test.shape[0]}")
 print(f"\nTarget distribution in training set:")
 print(pd.Series(y_train).value_counts())
@@ -103,7 +114,7 @@ plt.show()
 
 # Feature Importance (Coefficients)
 feature_importance = pd.DataFrame({
-    'Feature': X_train.columns,
+    'Feature': X.columns,
     'Coefficient': log_reg.coef_[0]
 }).sort_values('Coefficient', key=abs, ascending=False)
 
